@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->longText('content');
+            $table->string('meta_description');
             $table->string('status');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamp('published_at')->useCurrent();
