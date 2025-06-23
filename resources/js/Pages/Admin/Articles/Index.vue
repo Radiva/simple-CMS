@@ -2,6 +2,10 @@
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import { router, Link } from '@inertiajs/vue3'
 import { ref } from 'vue'
+import dayjs from 'dayjs'
+import 'dayjs/locale/id'
+
+dayjs.locale('id')
 
 defineProps({
   articles: Object
@@ -16,6 +20,9 @@ const destroy = (id) => {
 
 <template>
   <AdminLayout>
+    <div v-if="$page.props.flash.success" class="alert alert-success mb-4">
+      {{ $page.props.flash.success }}
+    </div>
     <div class="flex justify-between items-center mb-4">
       <h1 class="text-2xl font-bold">Artikel</h1>
       <Link :href="route('admin.artikel.create')" class="btn-primary">+ Tambah Artikel</Link>
@@ -36,7 +43,7 @@ const destroy = (id) => {
             <td class="px-4 py-2">{{ a.title }}</td>
             <td class="px-4 py-2 capitalize">{{ a.status }}</td>
             <td class="px-4 py-2">
-              {{ a.published_at ? new Date(a.published_at).toLocaleDateString() : '-' }}
+              {{ a.published_at ? dayjs(a.published_at).format('D MMMM YYYY HH:mm') : '-' }}
             </td>
             <td class="px-4 py-2 text-right space-x-2">
               <Link

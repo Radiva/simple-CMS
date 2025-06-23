@@ -29,5 +29,12 @@ class AppServiceProvider extends ServiceProvider
                 ->where('model_id', auth()->id())
                 ->value('roles.name');
         });
+
+        Inertia::share('flash', function () {
+            return [
+                'success' => session('success'),
+                'error' => session('error'),
+            ];
+        });
     }
 }

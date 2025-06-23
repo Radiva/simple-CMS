@@ -35,6 +35,8 @@ const props = defineProps({
   selectedCategories: Array,
 })
 
+const errorMessage = ref('')
+
 const isEdit = !!props.article
 
 const form = useForm({
@@ -52,12 +54,20 @@ const submit = () => {
   form.post(url, {
     preserveScroll: true,
     ...(isEdit && { method: 'put' }),
+    onError: (errors) => {
+      if (Object.keys(errors).length === 0) {
+        errorMessage.value = errors.error
+      }
+    }
   })
 }
 </script>
 
 <template>
   <AdminLayout>
+    <div v-if="errorMessage" class="alert alert-error">
+      {{ errorMessage }}
+    </div>
     <div class="max-w-3xl mx-auto">
       <h1 class="text-2xl font-bold mb-6">
         {{ isEdit ? 'Edit Artikel' : 'Tambah Artikel' }}
@@ -81,7 +91,7 @@ const submit = () => {
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Konten</label>
           <Editor
-            license-key="gpt"
+            license-key="gpl"
             :init="{
               height: 400,
               menubar: false,

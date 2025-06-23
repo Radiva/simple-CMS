@@ -39,6 +39,7 @@ class ArticleController extends Controller
             'content' => 'required',
             'status' => 'required|in:draft,published',
             'category_ids' => 'array',
+            'category_ids.*' => 'integer|exists:categories,id',
         ]);
 
         DB::beginTransaction();
@@ -70,6 +71,7 @@ class ArticleController extends Controller
             return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil ditambahkan.');
         } catch (\Throwable $e) {
             DB::rollBack();
+            \Illuminate\Support\Facades\Log::error('Gagal simpan artikel', ['error' => $e->getMessage()]);
             return back()->withErrors(['error' => 'Gagal menyimpan artikel.'])->withInput();
         }
     }

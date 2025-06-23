@@ -12,7 +12,7 @@ const form = useForm({
   name: props.kategori?.name || '',
 })
 
-const submit = () => {
+const submit = () => {  errorMessage.value = ''
   const url = isEdit
     ? route('admin.kategori.update', props.kategori.id)
     : route('admin.kategori.store')

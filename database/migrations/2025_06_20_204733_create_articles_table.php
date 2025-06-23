@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('content');
-            $table->string('meta_description');
+            $table->string('meta_description')->nullable();
             $table->string('status');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->timestamp('published_at')->useCurrent();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
