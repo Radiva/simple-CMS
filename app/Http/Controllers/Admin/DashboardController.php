@@ -15,8 +15,10 @@ class DashboardController extends Controller
 
         // Hitung data summary
         $totalArtikel = DB::table('articles')->count();
-        $totalPortofolio = DB::table('portofolios')->count();
+        $totalPortofolio = DB::table('portfolios')->count();
         $totalKomentar = DB::table('comments')->count();
+        $totalTautan = DB::table('links')->count();
+        $totalKategori = DB::table('categories')->count();
 
         // Ambil role pertama
         $role = DB::table('model_has_roles')
@@ -29,6 +31,8 @@ class DashboardController extends Controller
                 'artikel' => $totalArtikel,
                 'portofolio' => $totalPortofolio,
                 'komentar' => $totalKomentar,
+                'tautan' => $totalTautan,
+                'kategori' => $totalKategori,
             ],
             'role' => $role,
         ]);
