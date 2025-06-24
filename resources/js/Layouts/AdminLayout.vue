@@ -8,6 +8,7 @@ const menus = [
   { label: 'Dashboard', to: route('admin.dashboard'), roles: ['admin', 'editor'] },
   { label: 'Artikel', to: route('admin.artikel.index'), roles: ['admin', 'editor'] },
   { label: 'Portofolio', to: route('admin.portofolio.index'), roles: ['admin', 'editor'] },
+  { label: 'Tautan', to: route('admin.link.index'), roles: ['admin', 'editor'] },
   { label: 'Kategori', to: route('admin.kategori.index'), roles: ['admin'] },
   { label: 'Komentar', to: route('admin.komentar.index'), roles: ['admin'] },
 ]
