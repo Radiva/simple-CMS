@@ -38,15 +38,15 @@ use Inertia\Inertia;
 // });
 
 // 🔓 Halaman publik (pengunjung)
-Route::get('/', [PublicController::class, 'home'])->name('home');
-Route::get('/artikel', [PublicController::class, 'articleList'])->name('artikel.index');
-Route::get('/artikel/{slug}', [PublicController::class, 'articleDetail'])->name('artikel.detail');
+Route::get('/', [PublicController::class, 'index'])->name('home');
+// Route::get('/artikel', [PublicController::class, 'articleList'])->name('artikel.index');
+// Route::get('/artikel/{slug}', [PublicController::class, 'articleDetail'])->name('artikel.detail');
 Route::get('/portofolio', [PublicController::class, 'portfolioList'])->name('portofolio.index');
 Route::get('/portofolio/{slug}', [PublicController::class, 'portfolioDetail'])->name('portofolio.detail');
 
 // 🔐 Komentar (auth: pengikut)
 Route::middleware(['auth'])->group(function () {
-    Route::post('/komentar', [CommentController::class, 'store'])->name('komentar.store');
+    // Route::post('/komentar', [CommentController::class, 'store'])->name('komentar.store');
 });
 
 require __DIR__.'/auth.php';
