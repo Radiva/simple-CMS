@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -71,7 +72,7 @@ class ArticleController extends Controller
             return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil ditambahkan.');
         } catch (\Throwable $e) {
             DB::rollBack();
-            \Illuminate\Support\Facades\Log::error('Gagal simpan artikel', ['error' => $e->getMessage()]);
+            Log::error('Gagal simpan artikel', ['error' => $e->getMessage()]);
             return back()->withErrors(['error' => 'Gagal menyimpan artikel.'])->withInput();
         }
     }
