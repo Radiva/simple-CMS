@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('portofolio_category', function (Blueprint $table) {
+        Schema::create('portfolio_category', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('portofolio_id')->references('id')->on('portofolios');
+            $table->foreignId('portfolio_id')->references('id')->on('portfolios');
             $table->foreignId('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
