@@ -22,9 +22,12 @@ import 'tinymce/plugins/emoticons/js/emojis';
 import 'tinymce/plugins/link';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/table';
+import 'tinymce/plugins/image/plugin.js';
+import 'tinymce/plugins/codesample/plugin.js';
+import 'tinymce/plugins/wordcount/plugin.js';
 
 /* content UI CSS is required */
-// import 'tinymce/skins/ui/oxide/content.js';
+import 'tinymce/skins/ui/oxide/content.js';
 
 /* The default content CSS can be changed or replaced with appropriate CSS for the editor content. */
 import 'tinymce/skins/content/default/content.js';
@@ -94,9 +97,10 @@ const submit = () => {
             license-key="gpl"
             :init="{
               height: 400,
-              menubar: false,
-              plugins: 'link image code lists table',
-              toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | code',
+              // menubar: false,
+              plugins: 'link image code lists table codesample wordcount',
+              promotion: false,
+              // toolbar: 'undo redo | image link formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | code codesample',
             }"
             v-model="form.content"
           />
