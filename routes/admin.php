@@ -6,9 +6,9 @@ use App\Http\Controllers\Admin\{
     ArticleController,
     PortfolioController,
     LinkController,
-    CategoryController
+    CategoryController,
+    CommentController
 };
-use App\Http\Controllers\CommentController;
 
 // 🔐 Middleware: hanya user login yang punya role admin/editor
 Route::middleware(['auth', 'role:admin|editor'])->prefix('admin')->name('admin.')->group(function () {
@@ -41,5 +41,6 @@ Route::middleware(['auth', 'role:admin|editor'])->prefix('admin')->name('admin.'
     // Komentar (moderasi)
     Route::get('/komentar', [CommentController::class, 'index'])->name('komentar.index');
     Route::put('/komentar/{id}/approve', [CommentController::class, 'approve'])->name('komentar.approve');
+    Route::put('/komentar/{id}/reject', [CommentController::class, 'reject'])->name('komentar.reject');
     Route::delete('/komentar/{id}', [CommentController::class, 'destroy'])->name('komentar.destroy');
 });

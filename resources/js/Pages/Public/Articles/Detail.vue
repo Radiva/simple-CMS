@@ -1,9 +1,30 @@
 <script setup>
+import { ref } from 'vue'
+import { router } from '@inertiajs/vue3'
 import DetailLayout from '../DetailLayout.vue';
 
-defineProps({
-  articles: Object
+const props = defineProps({
+  articles: Object,
+  comments: Array,
+  auth: Object,
 })
+
+console.log(props.auth.user);
+
+const komentarIsi = ref('')
+
+const submitKomentar = () => {
+  router.post(route('komentar.store'), {
+    content: komentarIsi.value,
+    commentable_type: 'artikel', // atau 'portfolio'
+    commentable_id: props.articles.id, // atau portfolio.id
+  }, {
+    preserveScroll: true,
+    onSuccess: () => {
+      komentarIsi.value = ''
+    }
+  })
+}
 </script>
 
 <template>
@@ -35,6 +56,39 @@ defineProps({
       class="prose max-w-none prose-img:rounded-lg prose-a:text-blue-600 prose-a:underline hover:prose-a:no-underline"
       v-html="articles.content"
     ></div>
+    <!-- Komentar -->
+    <div class="mt-10">
+      <h3 class="text-lg font-semibold mb-4">Komentar</h3>
+
+      <div v-if="comments.length === 0" class="text-gray-500">Belum ada komentar.</div>
+
+      <ul class="space-y-4">
+        <li v-for="komentar in comments" :key="komentar.id" class="border-b pb-2">
+          <div class="text-sm font-bold">{{ komentar.user_name }}</div>
+          <div class="text-sm text-gray-600 mb-1">
+            {{ new Date(komentar.created_at).toLocaleString('id-ID') }}
+          </div>
+          <p class="text-gray-800">{{ komentar.content }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div v-if="auth?.user" class="mt-8">
+      <form @submit.prevent="submitKomentar" class="space-y-4">
+        <textarea
+          v-model="komentarIsi"
+          class="input w-full"
+          rows="3"
+          placeholder="Tulis komentar..."
+        ></textarea>
+        <div class="text-right">
+          <button class="btn-primary" type="submit">Kirim</button>
+        </div>
+      </form>
+    </div>
+    <div v-else class="mt-6 text-sm text-gray-600">
+      <a href="/login" class="text-blue-600 underline">Login</a> untuk menulis komentar.
+    </div>
   </div>
   </DetailLayout>
 </template>

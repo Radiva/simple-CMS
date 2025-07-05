@@ -47,7 +47,7 @@ Route::post('/kontak', [PublicController::class, 'contactStore'])->name('contact
 
 // 🔐 Komentar (auth: pengikut)
 Route::middleware(['auth'])->group(function () {
-    // Route::post('/komentar', [CommentController::class, 'store'])->name('komentar.store');
+    Route::post('/komentar', [CommentController::class, 'store'])->name('komentar.store');
 });
 
 require __DIR__.'/auth.php';

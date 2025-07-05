@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('commentable_id');
-            $table->string('commentable_type');
+            $table->unsignedBigInteger('commentable_id'); //id artikel atau portfolio
+            $table->string('commentable_type'); //artikel atau portofolio
             $table->text('content');
-            $table->string('status');
+            $table->string('status'); //pending, approved, rejected
             $table->timestamps();
         });
     }

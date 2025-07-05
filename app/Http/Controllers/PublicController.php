@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -65,8 +66,21 @@ class PublicController extends Controller
 
         if (!$articles) abort(404);
 
+        $comments = DB::table('comments')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->where('commentable_type', 'App\Models\Artikel')
+            ->where('commentable_id', $articles->id)
+            ->where('status', 'approved')
+            ->orderBy('comments.created_at', 'desc')
+            ->select('comments.*', 'users.name as user_name')
+            ->get();
+
         return Inertia::render('Public/Articles/Detail', [
-            'articles' => $articles
+            'articles' => $articles,
+            'comments' => $comments,
+            'auth' => [
+                'user' => Auth::user(),
+            ],
         ]);
     }
 
