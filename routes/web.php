@@ -39,10 +39,11 @@ use Inertia\Inertia;
 
 // 🔓 Halaman publik (pengunjung)
 Route::get('/', [PublicController::class, 'index'])->name('home');
-// Route::get('/artikel', [PublicController::class, 'articleList'])->name('artikel.index');
-// Route::get('/artikel/{slug}', [PublicController::class, 'articleDetail'])->name('artikel.detail');
-Route::get('/portofolio', [PublicController::class, 'portfolioList'])->name('portofolio.index');
-Route::get('/portofolio/{slug}', [PublicController::class, 'portfolioDetail'])->name('portofolio.detail');
+Route::get('/artikel', [PublicController::class, 'articleList'])->name('artikel.index');
+Route::get('/artikel/{slug}', [PublicController::class, 'articleDetail'])->name('artikel.detail');
+Route::get('/portofolio', [PublicController::class, 'portfolioList'])->name('portfolio.index');
+Route::get('/portofolio/{slug}', [PublicController::class, 'portfolioDetail'])->name('portfolio.detail');
+Route::post('/kontak', [PublicController::class, 'contactStore'])->name('contact.store');
 
 // 🔐 Komentar (auth: pengikut)
 Route::middleware(['auth'])->group(function () {
