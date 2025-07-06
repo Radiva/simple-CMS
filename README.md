@@ -1,66 +1,156 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Berikut adalah draft file `README.md` untuk project CMS kamu yang menggunakan **Laravel 10**, **Vue 3**, **Inertia**, dan **SPA-based**. README ini ditujukan untuk dokumentasi publik atau internal, dengan penjelasan fitur utama dan cara instalasi.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## 📄 `README.md`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+````md
+# ✨ Personal CMS — Laravel + Vue SPA
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A simple and modular CMS built with Laravel 10, Vue 3, Inertia.js, and MySQL, designed for personal branding purposes. This CMS supports content management for articles, portfolio, and user interaction through comments.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![Screenshot: Beranda](./screenshots/homepage.png)
+![Screenshot: Admin Dashboard](./screenshots/admin-dashboard.png)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📦 Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- ✅ SPA with Inertia.js + Tailwind CSS
+- ✅ Authentication (Breeze + optional social login)
+- ✅ Role-based access: Admin, Editor, Pengikut
+- ✅ Article & Portfolio with category support
+- ✅ Modular and reusable component structure
+- ✅ Comment system (pending/approved) with admin moderation
+- ✅ Contact form & social media footer
+- ✅ Responsive public landing page
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🚀 Tech Stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **Backend:** Laravel 10, MySQL, Query Builder (no Eloquent)
+- **Frontend:** Vue 3, Vite, Inertia.js, Tailwind CSS
+- **Editor:** TinyMCE rich-text integration
+- **Auth:** Laravel Breeze (with potential OAuth)
+- **File Upload:** Standard Laravel storage
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## ⚙️ Installation
 
-## Contributing
+```bash
+# Clone project
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Install backend dependencies
+composer install
 
-## Code of Conduct
+# Install frontend dependencies
+npm install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Copy and configure .env
+cp .env.example .env
+php artisan key:generate
 
-## Security Vulnerabilities
+# Run migrations
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Start local dev
+php artisan serve
+npm run dev
+````
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛂 User Roles
+
+| Role     | Access                                 |
+| -------- | -------------------------------------- |
+| Admin    | Full control: content, users, comments |
+| Editor   | Manage articles & portfolio            |
+| Pengikut | Commenting only (after login)          |
+
+---
+
+## 📁 Folder Structure Highlights
+
+```
+resources/
+  js/
+    Layouts/
+      AdminLayout.vue
+      PublicLayout.vue
+    Pages/
+      Admin/
+        Artikel/
+        Portfolio/
+        Komentar/
+      Public/
+        Home.vue
+        Artikel/
+        Portfolio/
+  views/
+    welcome.blade.php (optional fallback)
+```
+
+---
+
+## 🖼️ Screenshots
+
+### ✅ Landing Page
+
+![Home](./screenshots/homepage.png)
+
+### ✅ Artikel Detail
+
+![Detail Artikel](./screenshots/article-detail.png)
+
+### ✅ Admin Dashboard
+
+![Admin](./screenshots/admin-dashboard.png)
+
+### ✅ Komentar Moderasi
+
+![Komentar](./screenshots/moderasi-komentar.png)
+
+> 📂 Letakkan gambar di folder `public/screenshots` dan pastikan sesuai path saat diakses via browser/dev server.
+
+---
+
+## 🧪 To Do / Roadmap
+
+* [x] Dashboard admin role-based
+* [x] Modular component setup
+* [x] Artikel dan Portofolio CRUD
+* [x] Kategori multi-select
+* [x] Comment system with moderation
+* [ ] Notifikasi admin untuk komentar masuk
+* [ ] OAuth login
+* [ ] Dark mode
+
+---
+
+## 🤝 License
+
+This project is open-sourced under the [MIT license](LICENSE).
+
+---
+
+## ✨ Author
+
+Developed by [Your Name](https://yourdomain.com)
+
+```
+
+---
+
+## 📎 Catatan:
+
+- Ganti semua URL (`yourdomain.com`, GitHub repo, screenshot path) sesuai real path kamu.
+- Screenshot bisa kamu simpan di `public/screenshots/`, lalu akses dari root saat Live/Dev.
+- Bila kamu ingin versi markdown dengan badge CI/CD, deployment, dan GitHub Pages — bisa ditambahkan kemudian.
+
+Ingin saya bantu buatkan file markdown lengkap beserta struktur folder screenshot dummy dan versi `.env.example` juga?
+```

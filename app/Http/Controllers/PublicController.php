@@ -92,7 +92,7 @@ class PublicController extends Controller
             'message' => 'required|min:10',
         ]);
 
-        DB::table('kontaks')->insert([
+        DB::table('contacts')->insert([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'message' => $validated['message'],

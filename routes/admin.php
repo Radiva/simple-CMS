@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\{
     PortfolioController,
     LinkController,
     CategoryController,
-    CommentController
+    CommentController,
+    ContactController
 };
 
 // 🔐 Middleware: hanya user login yang punya role admin/editor
@@ -43,4 +44,7 @@ Route::middleware(['auth', 'role:admin|editor'])->prefix('admin')->name('admin.'
     Route::put('/komentar/{id}/approve', [CommentController::class, 'approve'])->name('komentar.approve');
     Route::put('/komentar/{id}/reject', [CommentController::class, 'reject'])->name('komentar.reject');
     Route::delete('/komentar/{id}', [CommentController::class, 'destroy'])->name('komentar.destroy');
+
+    Route::get('/kontak', [ContactController::class, 'index'])->name('kontak.index');
+    Route::delete('/kontak/{id}', [ContactController::class, 'destroy'])->name('kontak.destroy');
 });
