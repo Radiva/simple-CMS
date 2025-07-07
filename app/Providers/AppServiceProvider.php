@@ -36,5 +36,15 @@ class AppServiceProvider extends ServiceProvider
                 'error' => session('error'),
             ];
         });
+
+        Inertia::share('globalSettings', function () {
+                return [
+                    'site_name' => setting('site.name'),
+                    'site_description' => setting('site.description'),
+                    'instagram' => setting('social.instagram'),
+                    // tambahkan yang lain sesuai kebutuhan
+                ];
+            }
+        );
     }
 }

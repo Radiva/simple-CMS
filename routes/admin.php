@@ -8,7 +8,8 @@ use App\Http\Controllers\Admin\{
     LinkController,
     CategoryController,
     CommentController,
-    ContactController
+    ContactController,
+    SettingController
 };
 
 // 🔐 Middleware: hanya user login yang punya role admin/editor
@@ -29,7 +30,9 @@ Route::middleware(['auth', 'role:admin|editor'])->prefix('admin')->name('admin.'
     Route::resource('portofolio', PortfolioController::class)->except(['show']);
 
     // Link
-    Route::resource('link', LinkController::class)->except(['show']);
+    Route::get('/tautan', [LinkController::class, 'index'])->name('tautan.index');
+    Route::post('/tautan/bulk-save', [LinkController::class, 'bulkSave'])->name('tautan.bulk-save');
+    Route::delete('/tautan/{id}', [LinkController::class, 'destroy'])->name('tautan.destroy');
 
     // Kategori
     Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori.index');
@@ -47,4 +50,6 @@ Route::middleware(['auth', 'role:admin|editor'])->prefix('admin')->name('admin.'
 
     Route::get('/kontak', [ContactController::class, 'index'])->name('kontak.index');
     Route::delete('/kontak/{id}', [ContactController::class, 'destroy'])->name('kontak.destroy');
+
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
 });

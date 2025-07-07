@@ -1,10 +1,3 @@
-Berikut adalah draft file `README.md` untuk project CMS kamu yang menggunakan **Laravel 10**, **Vue 3**, **Inertia**, dan **SPA-based**. README ini ditujukan untuk dokumentasi publik atau internal, dengan penjelasan fitur utama dan cara instalasi.
-
----
-
-## 📄 `README.md`
-
-````md
 # ✨ Personal CMS — Laravel + Vue SPA
 
 A simple and modular CMS built with Laravel 10, Vue 3, Inertia.js, and MySQL, designed for personal branding purposes. This CMS supports content management for articles, portfolio, and user interaction through comments.
