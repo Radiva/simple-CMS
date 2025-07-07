@@ -32,7 +32,8 @@ const deleteKomentar = (id) => {
       <table class="w-full text-sm table-auto border">
         <thead>
           <tr class="bg-gray-100 text-left">
-            <th class="p-2">User</th>
+            <th class="p-2">Nama</th>
+            <th class="p-2">Email</th>
             <th class="p-2">Isi</th>
             <th class="p-2">Status</th>
             <th class="p-2">Aksi</th>
@@ -40,7 +41,8 @@ const deleteKomentar = (id) => {
         </thead>
         <tbody>
           <tr v-for="komentar in comments" :key="komentar.id" class="border-t">
-            <td class="p-2 font-semibold">{{ komentar.user_name }}</td>
+            <td class="p-2 font-semibold">{{ komentar.name }}</td>
+            <td class="p-2 font-semibold">{{ komentar.email }}</td>
             <td class="p-2 whitespace-pre-line">{{ komentar.content }}</td>
             <td class="p-2 capitalize">{{ komentar.status }}</td>
             <td class="p-2 flex gap-2">

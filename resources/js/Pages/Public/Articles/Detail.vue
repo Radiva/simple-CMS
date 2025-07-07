@@ -9,19 +9,23 @@ const props = defineProps({
   auth: Object,
 })
 
-console.log(props.auth.user);
-
-const komentarIsi = ref('')
+const komentar = ref({
+  nama: '',
+  email: '',
+  isi: '',
+  website: '', // honeypot
+  start_time: Date.now(), // time in ms
+})
 
 const submitKomentar = () => {
   router.post(route('komentar.store'), {
-    content: komentarIsi.value,
+    content: komentar.isi,
     commentable_type: 'artikel', // atau 'portfolio'
     commentable_id: props.articles.id, // atau portfolio.id
   }, {
     preserveScroll: true,
     onSuccess: () => {
-      komentarIsi.value = ''
+      komentar.isi = ''
     }
   })
 }
@@ -75,19 +79,16 @@ const submitKomentar = () => {
 
     <div v-if="auth?.user" class="mt-8">
       <form @submit.prevent="submitKomentar" class="space-y-4">
-        <textarea
-          v-model="komentarIsi"
-          class="input w-full"
-          rows="3"
-          placeholder="Tulis komentar..."
-        ></textarea>
-        <div class="text-right">
-          <button class="btn-primary" type="submit">Kirim</button>
+        <input v-model="komentar.nama" class="input w-full" placeholder="Nama lengkap" required />
+        <input v-model="komentar.email" class="input w-full" type="email" placeholder="Email (opsional)" />
+        <!-- Honeypot field -->
+        <div style="display: none;">
+            <input v-model="komentar.website" type="text" autocomplete="off" tabindex="-1" />
         </div>
+        <!-- Komentar -->
+        <textarea v-model="komentar.isi" class="input w-full" rows="3" placeholder="Tulis komentar..." required></textarea>
+        <button class="btn-primary" type="submit">Kirim Komentar</button>
       </form>
-    </div>
-    <div v-else class="mt-6 text-sm text-gray-600">
-      <a href="/login" class="text-blue-600 underline">Login</a> untuk menulis komentar.
     </div>
   </div>
   </DetailLayout>

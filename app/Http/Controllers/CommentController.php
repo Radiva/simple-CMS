@@ -13,16 +13,32 @@ class CommentController extends Controller
         $request->validate([
             'commentable_type' => 'required|in:artikel,portfolio',
             'commentable_id' => 'required|integer',
+            'name' => 'required|string|max:100',
+            'email' => 'nullable|email|max:100',
             'content' => 'required|min:3|max:1000',
+            'website' => 'nullable|string|max:100', // honeypot
+            'start_time' => 'required|numeric',
         ]);
 
+        // 🕳️ Honeypot check
+        if (!empty($request->website)) {
+            return response()->json(['error' => 'Spam detected'], 422);
+        }
+
+        // ⏳ Delay check (5 detik minimum)
+        $elapsed = now()->diffInSeconds(Carbon::createFromTimestampMs($request->start_time));
+        if ($elapsed < 5) {
+            return response()->json(['error' => 'Form submitted too quickly'], 422);
+        }
+
         $typeMap = [
-            'artikel' => 'App\Models\Artikel',
-            'portfolio' => 'App\Models\Portfolio',
+            'artikel' => \App\Models\Artikel::class,
+            'portfolio' => \App\Models\Portfolio::class,
         ];
 
         DB::table('comments')->insert([
-            'user_id' => Auth::id(),
+            'name' => $request->name,
+            'email' => $request->email,
             'commentable_id' => $request->commentable_id,
             'commentable_type' => $typeMap[$request->commentable_type],
             'content' => $request->content,
@@ -31,6 +47,6 @@ class CommentController extends Controller
             'updated_at' => now(),
         ]);
 
-        return back()->with('success', 'Komentar berhasil dikirim dan menunggu persetujuan.');
+        return back()->with('success', 'Komentar berhasil dikirim dan akan ditinjau terlebih dahulu.');
     }
 }

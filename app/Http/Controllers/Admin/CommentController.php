@@ -12,9 +12,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = DB::table('comments')
-            ->join('users', 'users.id', '=', 'comments.user_id')
-            ->orderByDesc('comments.created_at')
-            ->select('comments.*', 'users.name as user_name')
+            ->orderByDesc('created_at')
             ->get();
 
         return inertia('Admin/Comments', [
